@@ -3,6 +3,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Head from '../components/head';
 import Footer from '../components/footer';
+import { Redirect } from 'react-router';
 
 export default class Registrar extends Component{
 
@@ -11,6 +12,7 @@ export default class Registrar extends Component{
         this.state ={
             nome:'',
             email:'',
+            perfil:'',
             senha:'',
             senha2:''
         }
@@ -25,7 +27,13 @@ this.cadastrar = this.cadastrar.bind(this);
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
       
-            var raw = JSON.stringify({"nome":this.state.nome,"email":this.state.email,"senha":this.state.senha,"perfil":1, "imagem":"https://e-tinet.com/wp-content/uploads/2020/02/adicionar-usuario-no-linux.jpg"});
+            var raw = JSON.stringify({
+                "nome":this.state.nome,
+                "email":this.state.email,
+                "senha":this.state.senha,
+                "perfil":1, 
+                "imagem":"https://www.diaadiaarapongas.com.br/userfiles/usuario_classificadoss/usuario.jpg"});
+
             var requestOptions = {
               method: 'POST',
               headers: myHeaders,
@@ -53,6 +61,7 @@ this.cadastrar = this.cadastrar.bind(this);
     }
 
 render(){
+
     return(
         <React.Fragment>
         <Head/>

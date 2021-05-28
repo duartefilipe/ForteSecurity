@@ -7,6 +7,8 @@ const app = express();
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const session = require('express-session');
+const multer = require('multer');
+
 app.use(bodyparse.urlencoded({extended:false}));
 app.use(bodyparse.json());
 app.use(session({
@@ -16,6 +18,17 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "imagens/")
+    },
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + "-" + file.ogirinalname + ".jpg")
+    },
+  })
+  
+  const upload = multer({ storage })
 
 const porta = 8080;
 
@@ -33,6 +46,11 @@ app.use((req, res, next) => {
 app.get('/', (req, res) =>{
     res.send('Api do Curso');
 });
+
+app.post('/uploadImg', upload.single('file'), (req, res)=>{
+    return res.send(req.file.filename);
+    
+})
 
 app.post('/registrar', function(req, res){
     const nome =req.body.nome;
@@ -71,7 +89,9 @@ app.post('/login', (req,res)=>{
                 id: result.idUsu,
                 nome: result.nome,
                 email: result.email,
-                imagem: result.imagem
+                imagem: result.imagem,
+                perfil: result.perfil,
+               // senha: result.senha
             
             }
             

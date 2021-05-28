@@ -5,7 +5,7 @@ import home from './pages/home';
 import login from './pages/login';
 import registrar from './pages/registrar';
 import forum from './pages/forum';
-import publicacao from './pages/publicacao';
+import perfil from './pages/perfil';
 
 function route(){
     return(
@@ -15,7 +15,7 @@ function route(){
             <Route path="/login" component ={login}/>
             <Route path="/registrar" component ={registrar}/>
             <Route path="/forum" component ={forum}/>
-            <Route path="/publicacao" component ={publicacao}/>
+            <Route path="/perfil" component ={perfil}/>
         </BrowserRouter>
     )
 }

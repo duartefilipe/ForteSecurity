@@ -3,7 +3,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Head from '../components/head';
 import Carousel from '../components/carousel';
-import Home from '../components/body';
+import Body from '../components/body';
 import Footer from '../components/footer';
 
 function App(){
@@ -11,7 +11,7 @@ function App(){
         <React.Fragment>
         <Head/>
         <div><Carousel /></div>
-        <Home/>
+        <Body/>
         <Footer/>
         </React.Fragment>
     );
