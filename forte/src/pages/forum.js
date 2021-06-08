@@ -13,6 +13,7 @@ export default class Forum extends Component{
             imagem: sessionStorage.getItem('@web/imagem'),
             nome: sessionStorage.getItem('@web/nome'),
             perfil: sessionStorage.getItem('@web/perfil'),
+            idUsu: sessionStorage.getItem('@web/idUsu'),
             senha: sessionStorage.getItem('@web/senha'),
         }
       }
@@ -26,6 +27,7 @@ export default class Forum extends Component{
          <h1 class="text-light">Nome: {this.state.nome}</h1>
          <h1 class="text-light">Email: {this.state.email}</h1>
          <h1 class="text-light">Perfil: {this.state.perfil}</h1>
+         <h1 class="text-light">Id: {this.state.idUsu}</h1>
          <img class="d-block w-100 image-fluid" src={this.state.imagem}/>
      </div>
       <Footer/>

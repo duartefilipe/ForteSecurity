@@ -6,45 +6,93 @@ import Head2 from '../components/head2';
 import Footer from '../components/footer';
 
 export default class Forum extends Component{
-    constructor(props){
-        super(props);
-        this.state ={
-            email: sessionStorage.getItem('@web/email'),
-            imagem: sessionStorage.getItem('@web/imagem'),
-            nome: sessionStorage.getItem('@web/nome'),
-            perfil: sessionStorage.getItem('@web/perfil'),
-        }
+  constructor(props){
+    super(props);
+    this.state ={
+       email: sessionStorage.getItem('@web/email'),
+       nome: sessionStorage.getItem('@web/nome'),
+       imagem: sessionStorage.getItem('@web/imagem'),
+       logado_id: sessionStorage.getItem('@web/idUsu'),
+       senha: sessionStorage.getItem('@web/senha'),
+       usuario: [],
+       
+    }
+    this.updateImg = this.updateImg.bind(this);
+    this.returnUsuario = this.returnUsuario.bind(this);
       }
+
+     async returnUsuario(){
+      var myHeaders = new Headers();
+      myHeaders.append("Cookie", "essecookie=s%3AyuLjIoIiolSYbidY0NZ_P_klCdO9WjA2.%2FPlFn5bGUe86Zdt25OehvahBWW27zNzlqEJdYVbxEig");
+  
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+         };
+
+         fetch("http://localhost:8080/returnImg/"+this.state.logado_id, requestOptions)
+         .then(response => response.json())
+         .then(response => {this.setState({usuario: response || []})})
+         .catch(error => console.log('error', error));
+     }
+     componentDidMount(){
+         this.returnUsuario();
+     }
+
+      updateImg(e){
+        var myHeaders = new Headers();
+        myHeaders.append("Cookie", "essecookie=s%3ApJZmOEEnnBgtzM9un-2ejMjsfNKOyGKp.bEqfoizoNGdxCJmrcetrDWZOXIG0uTSg0VA0B%2BagWDM");
+        var fileInput = document.getElementById('file');
+        var formdata = new FormData();
+        formdata.append("file", fileInput.files[0], fileInput);
+        formdata.append("idUsu", this.state.logado_id);
+        //formdata.append("senha", this.state.senha);
+    
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: formdata,
+          redirect: 'follow'
+        };
+    
+        fetch("http://localhost:8080/uploadImg", requestOptions)
+          .then(response => response.json())
+          .then(response => {if(response === 1){
+              window.location.reload()
+          }})
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
+          }
+    
+
   
   render(){
+    sessionStorage.setItem('@web/imagem', this.state.usuario.imagem)
     return (
-
       <React.Fragment>
       <Head2/>
-     <div class="container mt-3 bg-dark">
-         <h1 class="text-light">Bem vindo:  {this.state.nome}</h1>
-        <div class="row">
-        <form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Nome</label>
-    <input type="text" value={this.state.nome} class="form-control" id="nome" aria-describedby="nome" placeholder="Nome"/>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email</label>
-    <input type="email" value={this.state.email} class="form-control" id="email" aria-describedby="email" placeholder="email"/>
-  </div>
-   
-  <button type="submit" class="mt-3 mb-3 btn btn-primary">Submit</button>
-</form>
-
-<form class="ml-3" >
+      <div class="container mt-3 bg-dark">
+          <span style={{fontSize:18, color:'white'}}>Bem vindo: {this.state.nome}</span>
+          <form class="m-3" >
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="text-success" >Email address</label>
+              <input type="email" class="form-control" value={this.state.email}  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+            </div>
+            <div class="form-group">
+              <label class="text-success" for="exampleInputPassword1">Nome</label>
+              <input type="text" class="form-control" value={this.state.senha}  id="exampleInputPassword1" placeholder="Password"/>
+            </div>
+            <button type="submit" class="btn btn-success mb-3">Alterar</button>
+        </form>
+        <form class="ml-3" onSubmit={this.updateImg}>
             <div class="btn-group " role="group" aria-label="Exemplo básico">
                 <div class="wrap-input100 validate-input" data-validate="Enter imagem">
                     <span class="btn-show-pass">
                       <i class="zmdi zmdi-eye"></i>
                     </span>
                     <label class="btn btn-secondary" style={{fontSize:12, height:45}}>
-                                      Selecion uma Imagem
+                                      Imagem
                       <i class="fas fa-cloud-upload-alt ">
                           <input type="file" name="file" id="file" accept="image/x-png,image/gif,image/jpeg" hidden/>
                       </i>  
@@ -59,9 +107,8 @@ export default class Forum extends Component{
                     </div>
                   </div>
           </form>
-
-        </div>
-     </div>
+        
+      </div>
       <Footer/>
       </React.Fragment>
     );

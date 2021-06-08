@@ -3,11 +3,14 @@ const bodyparse = require('body-parser');
 const usuario = require('./database/models/usuario');
 const empresa = require('./database/models/empresa');
 const lugar = require('./database/models/lugar');
+const path = require('path');
 const app = express();
+app.use('/imagens', express.static(path.join(__dirname, '/imagens')));
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const session = require('express-session');
 const multer = require('multer');
+
 
 app.use(bodyparse.urlencoded({extended:false}));
 app.use(bodyparse.json());
@@ -47,8 +50,21 @@ app.get('/', (req, res) =>{
     res.send('Api do Curso');
 });
 
+app.get('/returnImg/:idUsu', (req,res)=>{
+    const idUsu=req.params.idUsu;
+    usuario.findOne({where:{idUsu:idUsu}}).then(result =>{
+        if(result != undefined){
+            res.json(result);
+        }else{
+
+        }
+    })
+})
+
 app.post('/uploadImg', upload.single('file'), (req, res)=>{
-    return res.send(req.file.filename);
+    const idUsu= req.body.idUsu;
+    usuario.update({imagem: 'http://localhost:8080/imagens/'+req.file.filename},{where:{idUsu:idUsu}})
+    return res.json(1);
     
 })
 
@@ -86,7 +102,7 @@ app.post('/login', (req,res)=>{
         if(verify){
            
             req.session.result = {
-                id: result.idUsu,
+                idUsu: result.idUsu,
                 nome: result.nome,
                 email: result.email,
                 imagem: result.imagem,

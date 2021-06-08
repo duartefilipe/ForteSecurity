@@ -3,15 +3,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../media.css';
 
 function Head2() {
-
+    //const exit = () => {
+    //  sessionStorage.clear();
+    //  window.location.href = "/";
+    //}
     return (
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style={{height:72}}>
-    <a class="navbar-brand" href="#">Home</a>
+    <a class="navbar-brand" href="/forum">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a style={{fontSize:11}} class="dropdown-item bg-dark text-warning" href="/perfil">Meu Perfil</a>
+    <a style={{fontSize:11}} class="dropdown-item bg-dark text-warning" href="/perfil"><img src={sessionStorage.getItem('@web/imagem')} alt="user" class="rounded-circle" height="20" width="20" />Meu Perfil</a>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav col-md-1 ml-auto">
                     <li class="nav-item dropdown bg-dark">
@@ -27,7 +30,7 @@ function Head2() {
             </ul>
     </div>
     </nav>
-    );
+  );
 }
 
 export default Head2;
