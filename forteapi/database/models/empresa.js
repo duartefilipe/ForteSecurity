@@ -1,8 +1,8 @@
 const sequelize = require('sequelize');
-const conecta = require('../conexao');
+const connect = require('../conexao');
 
-const empresa = conecta.define('empresa',{
-    razao_social:{
+const empresa = connect.define('empresa',{
+    razaosocial:{
         type: sequelize.STRING,
         allowNull: false,
     },
@@ -12,20 +12,22 @@ const empresa = conecta.define('empresa',{
     },
     email:{
         type: sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     perfil:{
         type: sequelize.INTEGER,
-        allowNull: false
+        allowNull: true,
     },
     idEmp: {
-        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: sequelize.INTEGER
+      },
+      username:{
+          type: sequelize.STRING,
+          allowNull:false,
       }
-    
 })
 
-empresa.sync({force:false}).then(() => console.log('Tabela criada')).catch(() => console.log('Erro ao criar tabela'))
+empresa.sync({force:false}).then(() =>{console.log('Tabela Criada')}).catch(() => {console.log('Erro ao criar tabela')})
 module.exports = empresa;

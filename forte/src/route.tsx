@@ -6,6 +6,8 @@ import login from './pages/login';
 import registrar from './pages/registrar';
 import forum from './pages/forum';
 import perfil from './pages/perfil';
+import criarEmpresa from './pages/criarEmpresa';
+import empresas from './pages/empresas';
 
 function route(){
     return(
@@ -16,6 +18,8 @@ function route(){
             <Route path="/registrar" component ={registrar}/>
             <Route path="/forum" component ={forum}/>
             <Route path="/perfil" component ={perfil}/>
+            <Route path="/criarEmpresa" component ={criarEmpresa}/>
+            <Route path="/empresas" component ={empresas}/>
         </BrowserRouter>
     )
 }

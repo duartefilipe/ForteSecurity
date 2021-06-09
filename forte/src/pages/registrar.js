@@ -14,7 +14,8 @@ export default class Registrar extends Component{
             email:'',
             perfil:'',
             senha:'',
-            senha2:''
+            senha2:'',
+            redirect:false
         }
 
 this.cadastrar = this.cadastrar.bind(this);
@@ -61,7 +62,9 @@ this.cadastrar = this.cadastrar.bind(this);
     }
 
 render(){
-
+    if(this.state.redirect === true){
+        return  <Redirect to={{pathname: "/login"}}/>
+    }
     return(
         <React.Fragment>
         <Head/>

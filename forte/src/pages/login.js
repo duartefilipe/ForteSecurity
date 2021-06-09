@@ -40,7 +40,7 @@ export default class Login extends Component{
       }else{
         this.setState({usuario:response || [], redirect:true})
       }})
-    
+    .then(result => console.log(result))
       .catch(error => console.log('error', error));
       
       e.preventDefault()
@@ -53,7 +53,7 @@ export default class Login extends Component{
       sessionStorage.setItem('@web/email', this.state.usuario.email);
       sessionStorage.setItem('@web/perfil', this.state.usuario.perfil);
       sessionStorage.setItem('@web/imagem', this.state.usuario.imagem);
-      sessionStorage.setItem('@web/senha', this.state.senha)
+      sessionStorage.setItem('@web/senha', this.state.senha);
       //sessionStorage.setItem('@web/senha', this.state.user.senha);
       return  <Redirect
                 to={{
@@ -66,7 +66,12 @@ export default class Login extends Component{
 
       <React.Fragment>
       <Head></Head>
-      
+      <div class="container mt-3 bg-dark">
+        <div class="card p-3 bg-dark">
+            <span class="text-success"> {this.state.mgs}</span>
+        </div>
+      </div>
+
       <div class="container mt-3 bg-dark">
          
           <div class="card p-3 bg-dark">

@@ -63,9 +63,36 @@ app.get('/returnImg/:idUsu', (req,res)=>{
 
 app.post('/uploadImg', upload.single('file'), (req, res)=>{
     const idUsu= req.body.idUsu;
-    usuario.update({imagem: 'http://localhost:8080/imagens/'+req.file.filename},{where:{idUsu:idUsu}})
-    return res.json(1);
-    
+    const senha = req.body.senha;
+    //essa parte da senha é por questao de segurança para não ser possivel alterar a foto do usuario sem estar logado
+    usuario.findOne({where:{idUsu:idUsu}}).then(result =>{
+        var verify = bcrypt.compareSync(senha,result.senha);
+        if(verify){
+            usuario.update({imagem: 'http://localhost:8080/imagens/'+req.file.filename},{where:{idUsu:idUsu}})
+            return res.json(1);
+        }else{
+            return res.json('Voce não está logado par alterar')
+        }
+    })
+})
+
+app.post('/updatePerfil', (req, res)=>{
+    const idUsu= req.body.idUsu;
+    const email = req.body.email;
+    const nome = req.body.nome;
+    const senha = req.body.senha;
+    //essa parte da senha é por questao de segurança para não ser possivel alterar a foto do usuario sem estar logado
+    usuario.findOne({where:{idUsu:idUsu}}).then(result =>{
+        var verify = bcrypt.compareSync(senha,result.senha);
+        if(verify){
+            //faz as verificações e se der certo a senha da o update no campo email
+            usuario.update({email: email},{where:{idUsu:idUsu}})
+            usuario.update({nome: nome},{where:{idUsu:idUsu}})
+            return res.json(1);
+        }else{
+            return res.json('Voce não está logado par alterar')
+        }
+    })
 })
 
 app.post('/registrar', function(req, res){
@@ -88,9 +115,40 @@ app.post('/registrar', function(req, res){
                 imagem: imagem,
             }).then(() => {return res.json("Sucesso ao gravar")})
         }})
-
-    
 })
+
+
+
+
+app.post('/criarEmpresa', upload.single('file'), (req, res) => {
+    const razaosocial = req.body.razaosocial;
+    const cnpj = req.body.cnpj;
+    const email = req.body.email;
+    const perfil = req.body.perfil;
+    const username = req.body.username;
+
+        empresa.create({
+            razaosocial:razaosocial,
+            cnpj:cnpj,
+            email:email,
+            perfil:perfil,
+            username:username
+
+        }).then(() =>{return res.json("Sucesso ao gravar")})
+})  
+
+app.get('/empresas/:idEmp', (req,res)=>{
+    const idEmp = req.params.idEmp;
+    empresa.findOne({where:{idEmp:idEmp}}).then(result =>{
+        res.json(result)
+    })
+})
+app.get('/empresasAll', (req,res)=>{
+    empresa.findAll().then(result =>{
+        res.json(result)
+    })
+})
+
 
 app.post('/login', (req,res)=>{
     const email = req.body.email;
@@ -114,7 +172,7 @@ app.post('/login', (req,res)=>{
             
             return res.send(req.session.result)
         }else{
-            return res.json("Senha Invalida")
+            return res.json(1)
         }
     })
 })

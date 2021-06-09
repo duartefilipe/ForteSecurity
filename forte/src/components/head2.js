@@ -3,13 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../media.css';
 
 function Head2() {
-    //const exit = () => {
-    //  sessionStorage.clear();
-    //  window.location.href = "/";
-    //}
+    const exit = () => {
+        sessionStorage.clear();
+        window.location.href = "/";
+      }
     return (
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style={{height:72}}>
     <a class="navbar-brand" href="/forum">Home</a>
+    <a class="navbar-brand" onClick={exit} href="#">Sair</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
