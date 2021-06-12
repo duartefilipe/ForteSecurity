@@ -10,7 +10,9 @@ function App(){
     return(
         <React.Fragment>
         <Head/>
-        <div><Carousel /></div>
+        <div>
+            <Carousel />
+        </div>
         <Body/>
         <Footer/>
         </React.Fragment>

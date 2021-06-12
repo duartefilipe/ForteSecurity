@@ -30,12 +30,13 @@ const storage = multer.diskStorage({
       cb(null, Date.now() + "-" + file.ogirinalname + ".jpg")
     },
   })
-  
+
   const upload = multer({ storage })
 
 const porta = 8080;
 
 app.use(cors());
+
 app.use((req, res, next) => {
 	//Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
     res.header("Access-Control-Allow-Origin", "*");
@@ -44,7 +45,6 @@ app.use((req, res, next) => {
     app.use(cors());
     next();
 });
-
 
 app.get('/', (req, res) =>{
     res.send('Api do Curso');
@@ -117,9 +117,6 @@ app.post('/registrar', function(req, res){
         }})
 })
 
-
-
-
 app.post('/criarEmpresa', upload.single('file'), (req, res) => {
     const razaosocial = req.body.razaosocial;
     const cnpj = req.body.cnpj;
@@ -143,12 +140,12 @@ app.get('/empresas/:idEmp', (req,res)=>{
         res.json(result)
     })
 })
+
 app.get('/empresasAll', (req,res)=>{
     empresa.findAll().then(result =>{
         res.json(result)
     })
 })
-
 
 app.post('/login', (req,res)=>{
     const email = req.body.email;

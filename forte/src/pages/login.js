@@ -57,7 +57,7 @@ export default class Login extends Component{
       //sessionStorage.setItem('@web/senha', this.state.user.senha);
       return  <Redirect
                 to={{
-                pathname: "/forum",                
+                pathname: "/empresas",                
                 //state: { data: this.state.user }
                 }}
             />
