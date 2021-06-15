@@ -1,8 +1,9 @@
 const sequelize = require('sequelize');
-const conecta = require('../conexao');
+const connect = require('../conexao');
+const { INTEGER } = require('sequelize');
 
-const lugar = conecta.define('lugar',{
-    lugar:{
+const lugar = connect.define('lugar',{
+    lugarNome:{
         type: sequelize.STRING,
         allowNull: false,
     },
@@ -15,7 +16,7 @@ const lugar = conecta.define('lugar',{
         allowNull: false,
     },
     email:{
-        type: sequelize.INTEGER,
+        type: sequelize.STRING,
         allowNull: false,
     },
     perfis:{
@@ -31,9 +32,13 @@ const lugar = conecta.define('lugar',{
         autoIncrement: true,
         primaryKey: true,
         type: sequelize.INTEGER
+      },
+      idEmp: {
+        type: sequelize.INTEGER,
+        allowNull:false,
       }
     
 })
 
-lugar.sync({force:false}).then(() => console.log('Tabela criada')).catch(() => console.log('Erro ao criar tabela'))
+lugar.sync({force:false}).then(() => console.log('Tabela lugar criada')).catch(() => console.log('Erro ao criar tabela'))
 module.exports = lugar;

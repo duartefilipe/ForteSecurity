@@ -3,6 +3,7 @@ const bodyparse = require('body-parser');
 const usuario = require('./database/models/usuario');
 const empresa = require('./database/models/empresa');
 const lugar = require('./database/models/lugar');
+const inventario = require('./database/models/inventario');
 const path = require('path');
 const app = express();
 app.use('/imagens', express.static(path.join(__dirname, '/imagens')));
@@ -10,10 +11,9 @@ const bcrypt = require('bcrypt');
 const cors = require('cors');
 const session = require('express-session');
 const multer = require('multer');
-
-
 app.use(bodyparse.urlencoded({extended:false}));
 app.use(bodyparse.json());
+
 app.use(session({
     secret:'keyboard cat',
     name: 'essecookie',
@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
     },
   })
 
-  const upload = multer({ storage })
+const upload = multer({ storage })
 
 const porta = 8080;
 
@@ -134,6 +134,27 @@ app.post('/criarEmpresa', upload.single('file'), (req, res) => {
         }).then(() =>{return res.json("Sucesso ao gravar")})
 })  
 
+app.post('/criarLugar', upload.single('file'), (req, res) => {
+    const lugarNome = req.body.lugarNome;
+    const equipe = req.body.equipe;
+    const responsavel = req.body.responsavel;
+    const email = req.body.email;
+    const perfis = req.body.perfis;
+    const fonte_acesso = req.body.fonte_acesso;
+    const idEmp = req.body.idEmp;
+
+        lugar.create({
+            lugarNome:lugarNome,
+            equipe:equipe,
+            responsavel:responsavel,
+            email:email,
+            perfis:perfis,
+            fonte_acesso:fonte_acesso,
+            idEmp:idEmp
+
+        }).then(() =>{return res.json("Sucesso ao gravar lugar")})
+})  
+
 app.get('/empresas/:idEmp', (req,res)=>{
     const idEmp = req.params.idEmp;
     empresa.findOne({where:{idEmp:idEmp}}).then(result =>{
@@ -143,6 +164,26 @@ app.get('/empresas/:idEmp', (req,res)=>{
 
 app.get('/empresasAll', (req,res)=>{
     empresa.findAll().then(result =>{
+        res.json(result)
+    })
+})
+
+app.get('/lugares/:idEmp', (req,res)=>{
+    const idEmp = req.params.idEmp;
+    lugar.findAll({where:{idEmp:idEmp}}).then(result =>{
+        res.json(result)
+    })
+})
+
+app.get('/inventario/:idLug', (req,res)=>{
+    const idLug = req.params.idLug;
+    inventario.findAll({where:{idLug:idLug}}).then(result =>{
+        res.json(result)
+    })
+})
+
+app.get('/inventarioAll', (req,res)=>{
+    inventario.findAll().then(result =>{
         res.json(result)
     })
 })

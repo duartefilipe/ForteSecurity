@@ -32,5 +32,5 @@ const usuario = conecta.define('usuario',{
     }
 })
 
-usuario.sync({force:false}).then(() => console.log('Tabela criada')).catch(() => console.log('Erro ao criar tabela'))
+usuario.sync({force:false}).then(() => console.log('Tabela usuario criada')).catch(() => console.log('Erro ao criar tabela'))
 module.exports = usuario;

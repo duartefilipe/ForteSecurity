@@ -22,7 +22,7 @@ export default class criarEmpresa extends Component{
        this.InsertEmpresa = this.InsertEmpresa.bind(this)
     }
 
-    InsertEmpresa(e){
+    InsertLugar(e){
         var myHeaders = new Headers();
         myHeaders.append("Cookie", "essecookie=s%3AjvCtLUvFKER84oIcIqNXNEC-T0ms34Fj.9on%2BmRDwfou3rCo5bvC8YqjX4mQGdbr8MmTk%2F%2Ff3vkI");
 

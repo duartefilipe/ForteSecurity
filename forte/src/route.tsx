@@ -8,6 +8,8 @@ import empresas from './pages/empresas';
 import perfil from './pages/perfil';
 import criarEmpresa from './pages/criarEmpresa';
 import perfilEmpresa from './pages/perfilEmpresa';
+import criarLugar from './pages/criarLugar';
+
 
 function route(){
     return(
@@ -20,6 +22,7 @@ function route(){
             <Route path="/empresas" component ={empresas}/>
             <Route path="/perfil" component ={perfil}/>
             <Route path="/criarEmpresa" component ={criarEmpresa}/>
+            <Route path="/criarLugar" component ={criarLugar}/>
             <Route path="/perfilEmpresa" component ={perfilEmpresa}/>
         </BrowserRouter>
     )

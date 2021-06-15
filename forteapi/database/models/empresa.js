@@ -29,5 +29,5 @@ const empresa = connect.define('empresa',{
       }
 })
 
-empresa.sync({force:false}).then(() =>{console.log('Tabela Criada')}).catch(() => {console.log('Erro ao criar tabela')})
+empresa.sync({force:false}).then(() =>{console.log('Tabela empresa Criada')}).catch(() => {console.log('Erro ao criar tabela')})
 module.exports = empresa;
