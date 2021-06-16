@@ -162,6 +162,13 @@ app.get('/empresas/:idEmp', (req,res)=>{
     })
 })
 
+app.post('/deleteLugar/:idLug', (req,res)=>{
+    const idLug= req.params.idLug;
+    lugar.destroy({where: { idLug: idLug}})
+      .then(console.log('deletado inventario'));
+      return res.json(1);
+})
+
 app.get('/empresasAll', (req,res)=>{
     empresa.findAll().then(result =>{
         res.json(result)

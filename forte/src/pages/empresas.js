@@ -74,7 +74,7 @@ export default class Forum extends Component{
         </table>
         </div>
 
-<a class="btn btn-success ml-4 mt-3" href="/criarEmpresa">Adicionar uma nova publicação</a>
+<a class="btn btn-success ml-4 mt-3" href="/criarEmpresa">Adicionar nova empresa</a>
 
 
 

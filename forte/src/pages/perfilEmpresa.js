@@ -21,6 +21,7 @@ export default class Empresas extends Component{
         }
         this.carregaEmpresa = this.carregaEmpresa.bind(this);
         this.carregaLugares = this.carregaLugares.bind(this);
+        this.deleteLugar = this.deleteLugar.bind(this);
         this.exibe = this.exibe.bind(this);
       }
 
@@ -31,6 +32,8 @@ export default class Empresas extends Component{
 
         this.carregaEmpresa()
         this.carregaLugares()
+        
+        
     }
 
     carregaLugares(){
@@ -45,6 +48,11 @@ export default class Empresas extends Component{
       fetch("http://localhost:8080/lugares/"+this.state.to, requestOptions)
         .then(response => response.json())
         .then(response => {this.setState({lugar:response || []})})
+        .then(response => {if(response === 1){
+          window.location.redirect("/empresas")
+         }else{
+          
+         }})
         .catch(error => console.log('error', error));
     }
 
@@ -62,6 +70,25 @@ export default class Empresas extends Component{
         .then(response => response.json())
         .then(response => {this.setState({empresa:response || []})})
         .catch(error => console.log('error', error));
+    }
+
+    deleteLugar(idLug){
+      var myHeaders = new Headers();
+      myHeaders.append("Cookie", "essecookie=s%3AeOpl5luE9enimBHkvpkw6HS-sWobT191.jz5O7Hu5bKFVxSbkZu6bo8DU5QuSbZ4rFqOuHxBmEUA");
+
+      var formdata = new FormData();
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formdata,
+        redirect: 'follow'
+      };
+
+      fetch("http://localhost:8080/deleteLugar/"+idLug, requestOptions)
+        .then(response => response.json())
+        .then(response => {this.setState({lugar:response || []})})
+        .then(result => console.log(result))
     }
 
     exibe(v){
@@ -93,9 +120,13 @@ export default class Empresas extends Component{
 <br/><br/>
 
      <div class="container">
-      <table class="table">
+      <table class="table table-responsive ">
         <thead>
           <tr>
+          <th scope="col">Delete</th>
+          <th scope="col">Update</th>
+          <th scope="col">idEmp</th>
+          <th scope="col">idLug</th>
             <th scope="col">LugarNome</th>
             <th scope="col">Equipe</th>
             <th scope="col">responsavel</th>
@@ -109,6 +140,14 @@ export default class Empresas extends Component{
         {this.state.lugar.map(result =>(
           <tbody style={{fontSize:18, fontWeight:1000, color:'black'}}>
             <tr>
+              <td>
+                <button type="submit" onClick={() => this.deleteLugar(result.idLug)}>delete</button>
+              </td>
+              <td>
+                <a class="ml-2" href="#" style={{color:'black'}} >Alterar</a>
+              </td>
+              <td>{result.idEmp}</td>
+              <td>{result.idLug}</td>
               <td><a class="ml-2" href="#" style={{color:'black'}} >{result.lugarNome}</a></td>
               <td>{result.equipe}</td>
               <td>{result.responsavel}</td>
