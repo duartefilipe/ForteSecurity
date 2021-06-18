@@ -16,11 +16,15 @@ export default class criarEmpresa extends Component{
             email:'',
             perfil:'',
             redirect:false,
+            empresa: [],
             idEmp: sessionStorage.getItem('@web/idEmp'),
 
         }
        this.InsertLugar = this.InsertLugar.bind(this)
+       this.carregaEmpresas = this.carregaEmpresas.bind(this);
     }
+
+    
 
     InsertLugar(e){
         var myHeaders = new Headers();
@@ -48,6 +52,31 @@ export default class criarEmpresa extends Component{
           .catch(error => console.log('error', error));
     }
 
+    componentDidMount(){
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        this.state.to = url.searchParams.get("c");
+
+        this.carregaEmpresas()
+
+    }
+
+    carregaEmpresas(){
+        var myHeaders = new Headers();
+        myHeaders.append("Cookie", "essecookie=s%3Aoe7QJS1RVn6XCLTNT9ITYeRV6w-BVF3S.vtC04wjpCyoVv8G1Vchp1WY536RAlBlu1Wq4tM0%2Bto8");
+    
+        var requestOptions = {
+          method: 'GET',
+          headers: myHeaders,
+          redirect: 'follow'
+        };
+    
+        fetch("http://localhost:8080/empresasAll", requestOptions)
+          .then(response => response.json())
+          .then(response => {this.setState({empresa: response || []})})
+          .catch(error => console.log('error', error));
+      }
+
 render(){
     if(this.state.redirect === true){
         return <Redirect
@@ -59,12 +88,13 @@ render(){
     return(
         <React.Fragment>
         <Head2/>
-
+        
         <div class="container mt-3 bg-dark">
             <div class="card p-3 bg-dark">
+            <p style={{fontSize:12 , color:'green', marginRight:5}}>idemp: {this.state.empresa.idEmp}</p>
             <form class="bg-dark"  onSubmit={this.InsertLugar}>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label text-success">lugarNome</label>
+                    <label for="exampleInputEmail1" class="form-label text-success">lugar {this.state.idEmp} Nome </label>
                     <input value={this.state.lugarNome} onChange={(e) => this.setState({lugarNome: e.target.value})}  type="text" class="form-control p-2" id="lugarNome" placeholder="Informe um lugarNome" name="lugarNome"/>
                 </div>
                 <div class="mb-3">
@@ -87,14 +117,29 @@ render(){
                     <label for="exampleInputEmail1" class="form-label text-success">fonte_acesso</label>
                     <input value={this.state.fonte_acesso} onChange={(e) => this.setState({fonte_acesso: e.target.value})} type="text" class="form-control  p-2" id="fonte_acesso" placeholder="informe o fonte_acesso" name="fonte_acesso"/>
                 </div>
+
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label text-success">idEmp</label>
-                    <input value={this.state.idEmp} onChange={(e) => this.setState({idEmp: e.target.value})} type="text" class="form-control  p-2" id="idEmp" placeholder="informe o idEmp" name="idEmp"/>
+                    <input value={this.state.idEmp} onChange={(e) => this.setState({idEmp: e.target.value})} type="text" class="form-control  p-2" id="fonte_acesso" placeholder="informe o fonte_acesso" name="fonte_acesso"/>
                 </div>
+{/*
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label text-success">idEmp</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <label for="exampleInputEmail1" class="form-label text-success">idEmp</label>
+                    {this.state.empresa.map(result =>(
+                        <option value={result.idEmp} onChange={(e) => this.setState({idEmp: e.target.value})} name="idEmp">{result.razaosocial}, {result.idEmp} </option>
+                    ))}
+                    </select>
+                </div>
+    */}             
+
                 <button type="submit" class="btn btn-success">Cadastrar</button>
                 </form>
             </div>
         </div>
+
+        
         
         <Footer/>
         </React.Fragment>

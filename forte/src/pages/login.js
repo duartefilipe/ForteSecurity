@@ -3,6 +3,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Head from '../components/head';
 import { Redirect } from 'react-router';
+import Imagem1 from '../img/forte_security_partners_arc.png';
 
 export default class Login extends Component{
   constructor(props){
@@ -65,36 +66,38 @@ export default class Login extends Component{
     return (
 
       <React.Fragment>
-      <Head></Head>
-      <div class="container mt-3 bg-dark">
+      {/* 
+    <div class="container mt-3 bg-dark">
         <div class="card p-3 bg-dark">
             <span class="text-success"> {this.state.mgs}</span>
         </div>
       </div>
+*/}
 
-      <div class="container mt-3 bg-dark">
-         
-          <div class="card p-3 bg-dark">
-          
-          <form class="bg-dark" onSubmit={this.login}>
-              <div class="form-group">
-                  <label class="text-success" for="exampleInputEmail1">Email address</label>
-                  <input type="email" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})}  class="form-control bg-light p-3" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
-              </div>
-              <div class="form-group">
-                  <label class="text-success" for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control bg-light" value={this.state.senha} onChange={(e) => this.setState({senha: e.target.value})}  id="exampleInputPassword1" placeholder="Password"/>
-              </div>
+
+
   
-              <button type="submit" class="btn btn-success">Login</button>
-          </form>
-          </div>
-      </div>
-      <footer style={{marginTop:500}}>
-        <div class="bg-dark text-warning pt-3" style={{height:'75px', textAlign:'center'}}>
-          <span>© 2021 Copyright: Filipe Duarte</span>
-        </div>
-      </footer>
+  <div class="container teste" >
+         
+         <div class="card p-3 bg-dark">
+         
+         <form onSubmit={this.login} > 
+             <div class="form-group">
+                 <label class="text-success" for="exampleInputEmail1">Email address</label>
+                 <input type="email" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})}  class="form-control bg-light p-3" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+             </div>
+             <div class="form-group">
+                 <label class="text-success" for="exampleInputPassword1">Password</label>
+                 <input type="password" class="form-control bg-light" value={this.state.senha} onChange={(e) => this.setState({senha: e.target.value})}  id="exampleInputPassword1" placeholder="Password"/>
+             </div>
+ 
+             <button type="submit" class="btn btn-success">Login</button>
+         </form>
+         </div>
+     </div>
+
+
+{/* comentario    */}
       </React.Fragment>
     );
   }

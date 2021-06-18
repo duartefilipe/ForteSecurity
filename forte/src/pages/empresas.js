@@ -65,8 +65,8 @@ export default class Forum extends Component{
               <td><a class="ml-2" href={"http://localhost:3000/perfilEmpresa?c="+result.idEmp} style={{color:'black'}} >{result.razaosocial}</a></td>
               <td>{result.cnpj}</td>
               <td>{result.email}</td>
-              <i class="fas fa-trash-alt"></i>
-        
+              <td><a href="#" style={{color:'black'}}>Editar</a></td>
+              <td><a href="#" style={{color:'black'}}>Deletar</a></td>
             </tr>
            
           </tbody>
@@ -75,6 +75,7 @@ export default class Forum extends Component{
         </div>
 
 <a class="btn btn-success ml-4 mt-3" href="/criarEmpresa">Adicionar nova empresa</a>
+
 
 
 
