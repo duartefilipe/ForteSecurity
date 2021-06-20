@@ -87,7 +87,7 @@ const inventario = connect.define('inventario',{
         type: sequelize.STRING,
         allowNull: false,
     },
-    idEmp:{
+    idLug:{
         type: sequelize.INTEGER,
         allowNull: false,
     },

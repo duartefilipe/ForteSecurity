@@ -31,36 +31,22 @@ export default class Inventario extends Component {
     this.state.to = url.searchParams.get("c");
 
     this.carregaEmpresa()
-    this.carregaLugares()
+    this.carregaInventarios()
 
 
   }
+  componentDidMount() {
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    this.state.to = url.searchParams.get("c");
 
-  carregaLugares() {
-    var myHeaders = new Headers();
-    myHeaders.append("Cookie", "essecookie=s%3AynHuiNRC5GsarsqBctbtcrzviYBysJGx.tDpLc%2FYbaf4Rl4GLzMhmnZtRLnphipQPdlXpRKMti5s");
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow'
-    };
-    fetch("http://localhost:8080/lugares/" + this.state.to, requestOptions)
-      .then(response => response.json())
-      .then(response => { this.setState({ lugar: response || [] }) })
-      .then(response => {
-        if (response === 1) {
-          window.location.redirect("/empresas")
-        } else {
-
-        }
-      })
-      .catch(error => console.log('error', error));
+    this.carregaEmpresa()
+    this.carregaInventarios()
   }
 
-  carregaEmpresa() {
+  carregaInventarios() {
     var myHeaders = new Headers();
-    myHeaders.append("Cookie", "essecookie=s%3AqjKsVc4A6DzFOFAlvbRjTxv5NWWXK90Q.cDGt12Jc0zvXck7rMDd%2B4uy2puDekSGzbaBv%2BLSKkmo");
+    myHeaders.append("Cookie", "essecookie=s%3AzZ3Bkg3eADMxK-wA3iCeZnDZArzsUvwL.UUgPWzcV4Mww8bnMYjEG1dvNHhdxS%2Fsyt9xJxlczyKQ");
 
     var requestOptions = {
       method: 'GET',
@@ -68,35 +54,18 @@ export default class Inventario extends Component {
       redirect: 'follow'
     };
 
-    fetch("http://localhost:8080/empresas/" + this.state.to, requestOptions)
-      .then(response => response.json())
-      .then(response => { this.setState({ empresa: response || [] }) })
-      .catch(error => console.log('error', error));
+    fetch("http://localhost:8080/inventario/"+this.state.to, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
   }
 
-  deleteLugar(idLug) {
-    var myHeaders = new Headers();
-    myHeaders.append("Cookie", "essecookie=s%3AeOpl5luE9enimBHkvpkw6HS-sWobT191.jz5O7Hu5bKFVxSbkZu6bo8DU5QuSbZ4rFqOuHxBmEUA");
 
-    var formdata = new FormData();
-
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: formdata,
-      redirect: 'follow'
-    };
-
-    fetch("http://localhost:8080/deleteLugar/" + idLug, requestOptions)
-      .then(response => response.json())
-      .then(response => { this.setState({ lugar: response || [] }) })
-      .then(result => console.log(result))
-  }
 
   exibe(v) {
     if (v != undefined) {
       return (
-        <p style={{ fontSize: 12, color: 'green' }}>Perfil: {this.state.empresa.perfil}</p>
+          <p style={{ fontSize: 12, color: 'green' }}>Perfil: {this.state.empresa.perfil}</p>
       )
     }
   }

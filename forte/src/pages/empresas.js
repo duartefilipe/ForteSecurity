@@ -52,7 +52,7 @@ export default class Forum extends Component{
             <tr>
               <th scope="col">Editar</th>
               <th scope="col">Deletar</th>
-              <th scope="col">Inventario</th>
+                {/*<th scope="col">Inventario</th>*/}
               <th scope="col">Razao Social</th>
               <th scope="col">CNPJ</th>
               <th scope="col">Email</th>
@@ -65,7 +65,7 @@ export default class Forum extends Component{
               <tr>
                 <td><a href="#" style={{color:'black'}}>Editar</a></td>
                 <td><a href="#" style={{color:'black'}}>Deletar</a></td>
-                <td><a href="#" style={{color:'black'}} href={"http://localhost:3000/InventarioEmp?c="+result.idEmp}>Inventario</a></td>
+                  {/*<td><a href="#" style={{color:'black'}} href={"http://localhost:3000/InventarioEmp?c="+result.idEmp}>Inventario</a></td>*/}
                 <td><a class="ml-2" href={"http://localhost:3000/perfilEmpresa?c="+result.idEmp} style={{color:'black'}} >{result.idEmp}{result.razaosocial}</a></td>
                 <td>{result.cnpj}</td>
                 <td>{result.email}</td>

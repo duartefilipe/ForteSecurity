@@ -121,13 +121,9 @@ export default class criarEmpresa extends Component {
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label text-success">idEmp</label>
                                 <select id="idEmp" className="custom-select" name="idEmp" onChange={(e) => this.setState({ idEmp: e.target.value })}  >
-                                {
-                                        this.state.empresa.map(function (item, index) {
-                                            return (
-                                                <option value={item.idEmp} name="idEmp" id="idEmp">{item.razaosocial}, {item.idEmp} </option>
-                                            )
-                                        })
-                                    }
+                                    <option selected disabled>Escolhe uma opção </option>
+                                    {this.state.empresa.map(function (item, index) {return (
+                                                <option value={item.idEmp} name="idEmp" id="idEmp">{item.razaosocial}, {item.idEmp} </option>)})}
                                 </select>
                             </div>
 

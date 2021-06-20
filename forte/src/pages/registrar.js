@@ -18,7 +18,7 @@ export default class Registrar extends Component{
             redirect:false
         }
 
-this.cadastrar = this.cadastrar.bind(this);
+        this.cadastrar = this.cadastrar.bind(this);
 
     }
     cadastrar(e){

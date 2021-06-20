@@ -46,7 +46,8 @@ function Head2() {
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-              <a class="navbar-brand" href="/perfil">Meu Perfil</a>
+              <a class="navbar-brand" href="/empresas">Home</a>
+              <a className="navbar-brand" href="/perfil">Meu Perfil</a>
               <a class="navbar-brand" onClick={exit} href="#">Sair</a>
 
             </ul>

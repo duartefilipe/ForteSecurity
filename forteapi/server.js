@@ -135,6 +135,8 @@ app.post('/criarEmpresa', upload.single('file'), (req, res) => {
 })  
 
 app.post('/criarInventario', function(req, res){
+    const processo = req.body.processo;
+    const lugarInventario = req.body.lugarInventario;
     const nomeDado = req.body.nomeDado;
     const nomeSistema = req.body.nomeSistema;
     const chave = req.body.chave;
@@ -154,9 +156,11 @@ app.post('/criarInventario', function(req, res){
     const link_consentimento = req.body.link_consentimento;
     const observacoes = req.body.observacoes;
     const data_registro = req.body.data_registro;
-    const idEmp = req.body.idEmp;
+    const idLug = req.body.idLug;
 
-        empresa.create({
+        inventario.create({
+            processo:processo,
+            lugarInventario:lugarInventario,
             nomeDado:nomeDado,
             nomeSistema:nomeSistema,
             chave:chave,
@@ -176,7 +180,7 @@ app.post('/criarInventario', function(req, res){
             link_consentimento:link_consentimento,
             observacoes:observacoes,
             data_registro:data_registro,
-            idEmp:idEmp
+            idLug:idLug
 
         }).then(() =>{return res.json("Sucesso ao gravar Inventario")})
 })  
@@ -220,6 +224,12 @@ app.post('/deleteLugar/:idLug', (req,res)=>{
 
 app.get('/empresasAll', (req,res)=>{
     empresa.findAll().then(result =>{
+        res.json(result)
+    })
+})
+
+app.get('/lugaresAll', (req,res)=>{
+    lugar.findAll().then(result =>{
         res.json(result)
     })
 })

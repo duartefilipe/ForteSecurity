@@ -32,9 +32,7 @@ export default class Empresas extends Component {
 
     this.carregaEmpresa()
     this.carregaLugares()
-
-
-  }
+}
 
   carregaLugares() {
     var myHeaders = new Headers();
@@ -50,7 +48,7 @@ export default class Empresas extends Component {
       .then(response => { this.setState({ lugar: response || [] }) })
       .then(response => {
         if (response === 1) {
-          window.location.redirect("/empresas")
+          window.location.redirect("/lugares")
         } else {
 
         }
@@ -106,11 +104,7 @@ export default class Empresas extends Component {
 
       <React.Fragment>
         <Head2 />
-        {/*esse metodo verifica se o cmapo é nulo, se ele nao ofr vai exibi, caso seja nulo nao vai mostrar nada
-      <div class="container bg-dar">
-        <a class="btn btn-success ml-4 mt-3" href="/criarLugar">Adicionar Lugar</a>
-      </div>
- */}
+
         <div class="container mt-3 bg-light">
           <div class="row">
           <p>{this.state.empresa.razaosocial} |</p>
@@ -122,6 +116,10 @@ export default class Empresas extends Component {
         <br /><br />
 
         <div class="container">
+          <div class="row">
+            <h3>Lugares da empresa: {this.state.empresa.razaosocial}</h3>
+          </div>
+          <div class="row">
           <table class="table table-responsive ">
             <thead>
               <tr>
@@ -150,7 +148,7 @@ export default class Empresas extends Component {
                   </td>
                   {/*<td>{result.idEmp}</td>
               <td>{result.idLug}</td>*/}
-                  <td><a class="ml-2" href="#" style={{ color: 'black' }} >{result.lugarNome}</a></td>
+                  <td><a class="ml-2" href={"http://localhost:3000/InventarioLug?c="+result.idLug} style={{ color: 'black' }} >{result.lugarNome}</a></td>
                   <td>{result.equipe}</td>
                   <td>{result.responsavel}</td>
                   <td>{result.email}</td>
@@ -163,6 +161,7 @@ export default class Empresas extends Component {
               </tbody>
             ))}
           </table>
+          </div>
         </div>
 
         <Footer />
