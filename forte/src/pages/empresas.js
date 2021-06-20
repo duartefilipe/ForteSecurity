@@ -46,34 +46,34 @@ export default class Forum extends Component{
 
       <React.Fragment>
       <Head2/>
-      <div class="container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">nome</th>
-            <th scope="col">CNPJ</th>
-            <th scope="col">email</th>
-            <th scope="col">Inventario</th>
-            <th scope="col">Editar</th>
-            <th scope="col">Deletar</th>
-          </tr>
-         
-        </thead>
-        
-        {this.state.empresa.map(result =>(
-          <tbody style={{fontSize:18, fontWeight:1000, color:'black'}}>
+      <div class="container mt-3">
+        <table class="table table-bordered table-responsive">
+          <thead>
             <tr>
-              <td><a class="ml-2" href={"http://localhost:3000/perfilEmpresa?c="+result.idEmp} style={{color:'black'}} >{result.idEmp}{result.razaosocial}</a></td>
-              <td>{result.cnpj}</td>
-              <td>{result.email}</td>
-              <td><a href="#" style={{color:'black'}} href={"http://localhost:3000/InventarioEmp?c="+result.idEmp}>Inventario</a></td>
-              <td><a href="#" style={{color:'black'}}>Editar</a></td>
-              <td><a href="#" style={{color:'black'}}>Deletar</a></td>
+              <th scope="col">Editar</th>
+              <th scope="col">Deletar</th>
+              <th scope="col">Inventario</th>
+              <th scope="col">Razao Social</th>
+              <th scope="col">CNPJ</th>
+              <th scope="col">Email</th>
             </tr>
-           
-          </tbody>
-          ))}
-        </table>
+          
+          </thead>
+          
+          {this.state.empresa.map(result =>(
+            <tbody style={{fontSize:18, fontWeight:1000, color:'black'}}>
+              <tr>
+                <td><a href="#" style={{color:'black'}}>Editar</a></td>
+                <td><a href="#" style={{color:'black'}}>Deletar</a></td>
+                <td><a href="#" style={{color:'black'}} href={"http://localhost:3000/InventarioEmp?c="+result.idEmp}>Inventario</a></td>
+                <td><a class="ml-2" href={"http://localhost:3000/perfilEmpresa?c="+result.idEmp} style={{color:'black'}} >{result.idEmp}{result.razaosocial}</a></td>
+                <td>{result.cnpj}</td>
+                <td>{result.email}</td>
+              </tr>
+            
+            </tbody>
+            ))}
+          </table>
         </div>
 
         <div class="container">
