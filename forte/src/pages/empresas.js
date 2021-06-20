@@ -53,6 +53,7 @@ export default class Forum extends Component{
             <th scope="col">nome</th>
             <th scope="col">CNPJ</th>
             <th scope="col">email</th>
+            <th scope="col">Inventario</th>
             <th scope="col">Editar</th>
             <th scope="col">Deletar</th>
           </tr>
@@ -62,9 +63,10 @@ export default class Forum extends Component{
         {this.state.empresa.map(result =>(
           <tbody style={{fontSize:18, fontWeight:1000, color:'black'}}>
             <tr>
-              <td><a class="ml-2" href={"http://localhost:3000/perfilEmpresa?c="+result.idEmp} style={{color:'black'}} >{result.razaosocial}</a></td>
+              <td><a class="ml-2" href={"http://localhost:3000/perfilEmpresa?c="+result.idEmp} style={{color:'black'}} >{result.idEmp}{result.razaosocial}</a></td>
               <td>{result.cnpj}</td>
               <td>{result.email}</td>
+              <td><a href="#" style={{color:'black'}} href={"http://localhost:3000/InventarioEmp?c="+result.idEmp}>Inventario</a></td>
               <td><a href="#" style={{color:'black'}}>Editar</a></td>
               <td><a href="#" style={{color:'black'}}>Deletar</a></td>
             </tr>
@@ -74,7 +76,13 @@ export default class Forum extends Component{
         </table>
         </div>
 
-<a class="btn btn-success ml-4 mt-3" href="/criarEmpresa">Adicionar nova empresa</a>
+        <div class="container">
+          <div class="row">
+            <a class="btn btn-success ml-4 mt-3" href="/criarEmpresa">Adicionar Empresa</a>
+            <a class="btn btn-warning ml-4 mt-3" href="/criarLugar">Adicionar Lugar</a>
+            <a class="btn btn-primary ml-4 mt-3" href="/criarInventario">Adicionar Inventario</a>
+          </div>
+        </div>
 
 
 

@@ -104,11 +104,11 @@ export default class Empresas extends Component{
 
       <React.Fragment>
       <Head2/>
-
+{/*esse metodo verifica se o cmapo é nulo, se ele nao ofr vai exibi, caso seja nulo nao vai mostrar nada
       <div class="container bg-dar">
         <a class="btn btn-success ml-4 mt-3" href="/criarLugar">Adicionar Lugar</a>
       </div>
-
+ */}
      <div class="container mt-3 bg-dark">
          <div class="container mt-3 bg-dark row">
               <p style={{fontSize:12 , color:'green', marginRight:5}}>{this.state.empresa.razaosocial} |</p>
@@ -125,8 +125,8 @@ export default class Empresas extends Component{
           <tr>
           <th scope="col">Delete</th>
           <th scope="col">Update</th>
-          <th scope="col">idEmp</th>
-          <th scope="col">idLug</th>
+          {/*<th scope="col">idEmp</th>
+          <th scope="col">idLug</th> */}
             <th scope="col">LugarNome</th>
             <th scope="col">Equipe</th>
             <th scope="col">responsavel</th>
@@ -146,8 +146,8 @@ export default class Empresas extends Component{
               <td>
                 <a class="ml-2" href="#" style={{color:'black'}} >Alterar</a>
               </td>
-              <td>{result.idEmp}</td>
-              <td>{result.idLug}</td>
+              {/*<td>{result.idEmp}</td>
+              <td>{result.idLug}</td>*/}
               <td><a class="ml-2" href="#" style={{color:'black'}} >{result.lugarNome}</a></td>
               <td>{result.equipe}</td>
               <td>{result.responsavel}</td>

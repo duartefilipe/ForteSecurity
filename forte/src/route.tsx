@@ -7,6 +7,7 @@ import registrar from './pages/registrar';
 import empresas from './pages/empresas';
 import perfil from './pages/perfil';
 import criarEmpresa from './pages/criarEmpresa';
+import criarInventario from './pages/criarInventario';
 import perfilEmpresa from './pages/perfilEmpresa';
 import criarLugar from './pages/criarLugar';
 
@@ -17,6 +18,7 @@ function route(){
             {/* COMENTÁRIO JSX <Route path="/" exact component ={home}/>*/}
             <Route path="/" exact component ={login}/>
             <Route path="/inventario" component ={inventario}/>
+            <Route path="/criarInventario" component ={criarInventario}/>
             <Route path="/login" component ={login}/>
             <Route path="/registrar" component ={registrar}/>
             <Route path="/empresas" component ={empresas}/>

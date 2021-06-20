@@ -122,17 +122,18 @@ render(){
                     <label for="exampleInputEmail1" class="form-label text-success">idEmp</label>
                     <input value={this.state.idEmp} onChange={(e) => this.setState({idEmp: e.target.value})} type="text" class="form-control  p-2" id="fonte_acesso" placeholder="informe o fonte_acesso" name="fonte_acesso"/>
                 </div>
-{/*
+
+
+ {/*
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label text-success">idEmp</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <label for="exampleInputEmail1" class="form-label text-success">idEmp</label>
-                    {this.state.empresa.map(result =>(
-                        <option value={result.idEmp} onChange={(e) => this.setState({idEmp: e.target.value})} name="idEmp">{result.razaosocial}, {result.idEmp} </option>
-                    ))}
+                    <select class="form-select" aria-label="Default select example" name="idEmp" id="idEmp">
+                            {this.state.empresa.map(result =>(
+                                <option value={result.idEmp} onChange={(e) => this.setState({idEmp: e.target.value})} >{result.razaosocial}, {result.idEmp} </option>
+                            ))}
                     </select>
                 </div>
-    */}             
+               */} 
 
                 <button type="submit" class="btn btn-success">Cadastrar</button>
                 </form>

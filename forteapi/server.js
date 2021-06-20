@@ -134,6 +134,53 @@ app.post('/criarEmpresa', upload.single('file'), (req, res) => {
         }).then(() =>{return res.json("Sucesso ao gravar")})
 })  
 
+app.post('/criarInventario', function(req, res){
+    const nomeDado = req.body.nomeDado;
+    const nomeSistema = req.body.nomeSistema;
+    const chave = req.body.chave;
+    const finalidade = req.body.finalidade;
+    const escopo = req.body.escopo;
+    const baseLegal = req.body.baseLegal;
+    const fundamentacao = req.body.fundamentacao;
+    const descricao = req.body.descricao;
+    const armazenamento = req.body.armazenamento;
+    const retencao = req.body.retencao;
+    const estrategiaRemocao = req.body.estrategiaRemocao;
+    const operadores = req.body.operadores;
+    const informacao_sensivel = req.body.informacao_sensivel;
+    const transferencia_int_dados = req.body.transferencia_int_dados;
+    const transferencia_int_dados_pais = req.body.transferencia_int_dados_pais;
+    const consentimento_obtido = req.body.consentimento_obtido;
+    const link_consentimento = req.body.link_consentimento;
+    const observacoes = req.body.observacoes;
+    const data_registro = req.body.data_registro;
+    const idEmp = req.body.idEmp;
+
+        empresa.create({
+            nomeDado:nomeDado,
+            nomeSistema:nomeSistema,
+            chave:chave,
+            finalidade:finalidade,
+            escopo:escopo,
+            baseLegal:baseLegal,
+            fundamentacao:fundamentacao,
+            descricao:descricao,
+            armazenamento:armazenamento,
+            retencao:retencao,
+            estrategiaRemocao:estrategiaRemocao,
+            operadores:operadores,
+            informacao_sensivel:informacao_sensivel,
+            transferencia_int_dados:transferencia_int_dados,
+            transferencia_int_dados_pais:transferencia_int_dados_pais,
+            consentimento_obtido:consentimento_obtido,
+            link_consentimento:link_consentimento,
+            observacoes:observacoes,
+            data_registro:data_registro,
+            idEmp:idEmp
+
+        }).then(() =>{return res.json("Sucesso ao gravar Inventario")})
+})  
+
 app.post('/criarLugar', upload.single('file'), (req, res) => {
     const lugarNome = req.body.lugarNome;
     const equipe = req.body.equipe;
@@ -141,7 +188,9 @@ app.post('/criarLugar', upload.single('file'), (req, res) => {
     const email = req.body.email;
     const perfis = req.body.perfis;
     const fonte_acesso = req.body.fonte_acesso;
-    const idEmp = req.body.idEmp;
+    //const idEmp = req.body.idEmp;
+    const idEmp = parseInt(req.body.idEmp);
+    console.log(req.body);
 
         lugar.create({
             lugarNome:lugarNome,
