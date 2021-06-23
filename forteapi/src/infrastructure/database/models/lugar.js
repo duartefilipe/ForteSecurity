@@ -40,5 +40,5 @@ const lugar = connect.define('lugar',{
     
 })
 
-lugar.sync({force:false}).then(() => console.log('Tabela lugar criada')).catch(() => console.log('Erro ao criar tabela'))
+lugar.sync({force:false}).then(() => console.log('Tabela lugar criada')).catch(error => console.log('Erro ao criar tabela' + error))
 module.exports = lugar;
