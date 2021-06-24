@@ -109,9 +109,13 @@ export default class criarEmpresa extends Component {
                                 <label for="exampleInputEmail1" class="form-label text-success">email</label>
                                 <input value={this.state.email} onChange={(e) => this.setState({ email: e.target.value })} type="text" class="form-control  p-2" id="email" placeholder="informe o email" name="email" />
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label text-success">perfis</label>
-                                <input value={this.state.perfis} onChange={(e) => this.setState({ perfis: e.target.value })} type="text" class="form-control  p-2" id="perfis" placeholder="informe o perfis" name="perfis" />
+                            <div className="mb-3">
+                                <label htmlFor="exampleInputEmail1" className="form-label text-success">Perfil</label>
+                                <select id="perfil" className="custom-select" name="perfil" >
+                                    <option selected disabled>Escolhe uma opção</option>
+                                    <option value="1" >Admin</option>)
+                                    <option value="2" >Empresa</option>)
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label text-success">fonte_acesso</label>
@@ -123,7 +127,7 @@ export default class criarEmpresa extends Component {
                                 <select id="idEmp" className="custom-select" name="idEmp" onChange={(e) => this.setState({ idEmp: e.target.value })}  >
                                     <option selected disabled>Escolhe uma opção </option>
                                     {this.state.empresa.map(function (item, index) {return (
-                                                <option value={item.idEmp} name="idEmp" id="idEmp">{item.razaosocial}, {item.idEmp} </option>)})}
+                                     <option value={item.idEmp} name="idEmp" id="idEmp">{item.razaosocial}, {item.idEmp} </option>)})}
                                 </select>
                             </div>
 

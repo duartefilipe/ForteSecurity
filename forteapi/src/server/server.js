@@ -2,7 +2,7 @@ const express = require('express');
 const bodyparse = require('body-parser');
 const path = require('path');
 const app = express();
-const bcrypt = require('bcrypt');
+
 const cors = require('cors');
 const session = require('express-session');
 import routes from '../application/routes/routes';
@@ -35,7 +35,8 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/forte-api', routes)
+//app.use('/forte-api', routes)
+app.use(routes)
 
 app.listen(process.env.PORT, () =>{
     console.log('listen porta: '+process.env.PORT);

@@ -46,13 +46,13 @@ export default class Registrar extends Component{
               .then(response => response.json())
               .then(response =>{
                 if(response == 'Já existe esse email'){
-                  alert('Já existe esse email cadastrado!!!')
+                    alert('Já existe esse email cadastrado!!!')
                 }else{
-                  this.setState({redirect:true})
-                  alert('Cadastrado com sucesso!!!')
-                  
+                    this.setState({redirect:true})
+                    alert('Cadastrado com sucesso!!!')
+
                 }
-              })
+            })
               .then(result => console.log(result))
               .catch(error => console.log('error', error));
         }

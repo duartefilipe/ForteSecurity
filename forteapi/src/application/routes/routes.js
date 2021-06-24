@@ -1,5 +1,5 @@
 import express from "express";
-
+const bcrypt = require('bcrypt');
 const usuario = require('../../infrastructure/database/models/usuario');
 const empresa = require('../../infrastructure/database/models/empresa');
 const lugar = require('../../infrastructure/database/models/lugar');
@@ -136,8 +136,8 @@ routes.get('/empresas/:idEmp', (req,res)=>{
 routes.post('/deleteLugar/:idLug', (req,res)=>{
     const idLug= req.params.idLug;
     lugar.destroy({where: { idLug: idLug}})
-        .then(console.log('deletado inventario'));
-    return res.json(1);
+        .then(() => {return res.json("Sucesso ao deletar lugar")});
+
 })
 
 routes.get('/empresasAll', (req,res)=>{

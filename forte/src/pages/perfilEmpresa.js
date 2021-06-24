@@ -4,6 +4,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Head2 from '../components/head2';
 import Footer from '../components/footer';
+import {Redirect} from "react-router";
 
 export default class Empresas extends Component {
   constructor(props) {
@@ -17,7 +18,8 @@ export default class Empresas extends Component {
       senha: sessionStorage.getItem('@web/senha'),
       to: '',
       empresa: [],
-      lugar: []
+      lugar: [],
+      redirect:false
     }
     this.carregaEmpresa = this.carregaEmpresa.bind(this);
     this.carregaLugares = this.carregaLugares.bind(this);
@@ -32,6 +34,8 @@ export default class Empresas extends Component {
 
     this.carregaEmpresa()
     this.carregaLugares()
+
+    
 }
 
   carregaLugares() {
@@ -46,14 +50,9 @@ export default class Empresas extends Component {
     fetch("http://localhost:8080/lugares/" + this.state.to, requestOptions)
       .then(response => response.json())
       .then(response => { this.setState({ lugar: response || [] }) })
-      .then(response => {
-        if (response === 1) {
-          window.location.redirect("/lugares")
-        } else {
-
-        }
-      })
       .catch(error => console.log('error', error));
+    console.log("meu teste")
+    console.log(this.state.result)
   }
 
   carregaEmpresa() {
@@ -88,7 +87,14 @@ export default class Empresas extends Component {
     fetch("http://localhost:8080/deleteLugar/" + idLug, requestOptions)
       .then(response => response.json())
       .then(response => { this.setState({ lugar: response || [] }) })
+        .then(response =>{
+
+            this.setState({redirect:true})
+            alert('Deletado com sucesso!!!')
+
+       })
       .then(result => console.log(result))
+
   }
 
   exibe(v) {
@@ -100,6 +106,9 @@ export default class Empresas extends Component {
   }
 
   render() {
+    if(this.state.redirect === true){
+      return  <Redirect to={{pathname: "/empresas"}}/>
+    }
     return (
 
       <React.Fragment>
@@ -137,8 +146,8 @@ export default class Empresas extends Component {
 
             </thead>
 
-            {this.state.lugar.map(result => (
-              <tbody style={{ fontSize: 18, fontWeight: 1000, color: 'black' }}>
+            {this.state.lugar.map((result,a) =>
+                <tbody style={{ fontSize: 18, fontWeight: 1000, color: 'black' }}>
                 <tr>
                   <td>
                     <button type="submit" onClick={() => this.deleteLugar(result.idLug)}>delete</button>
@@ -159,7 +168,7 @@ export default class Empresas extends Component {
                 </tr>
 
               </tbody>
-            ))}
+            )}
           </table>
           </div>
         </div>
