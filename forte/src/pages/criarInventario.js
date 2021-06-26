@@ -45,12 +45,12 @@ export default class criarInventario extends Component{
         var url_string = window.location.href;
         var url = new URL(url_string);
         this.state.to = url.searchParams.get("c");
-        this.carregaLugares()
+        this.carregaLugares();
     }
 
     carregaLugares() {
         var myHeaders = new Headers();
-        myHeaders.append("Cookie", "essecookie=s%3Aoe7QJS1RVn6XCLTNT9ITYeRV6w-BVF3S.vtC04wjpCyoVv8G1Vchp1WY536RAlBlu1Wq4tM0%2Bto8");
+        myHeaders.append("Cookie", "essecookie=s%3AaC6b-AQF7tfzFizaNW7SMeDaOGYX0Dok.1MbZEzJVnYyna%2FsxGvDFD7AKAT6jgWjpxR%2BVdxQ5Lzc");
 
         var requestOptions = {
             method: 'GET',
@@ -66,45 +66,43 @@ export default class criarInventario extends Component{
 
     InsertInventario(e){
         var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("Cookie", "essecookie=s%3AdDZWfRwGKmjjnhVqC4qHIM2jKWjH9eyi.sEFyblirbWRcZbZ%2BrnlalwHfPe05JOo7ZBfoFfbpr1U");
+        myHeaders.append("Cookie", "essecookie=s%3AynHuiNRC5GsarsqBctbtcrzviYBysJGx.tDpLc%2FYbaf4Rl4GLzMhmnZtRLnphipQPdlXpRKMti5s");
 
-        var raw = JSON.stringify({
-        "processo": this.state.processo,
-        "lugarInventario": this.state.lugarInventario,
-        "nomeDado": this.state.nomeDado,
-        "nomeSistema": this.state.nomeSistema,
-        "chave": this.state.chave,
-        "finalidade": this.state.finalidade,
-        "escopo": this.state.escopo,
-        "baseLegal": this.state.baseLegal,
-        "fundamentacao": this.state.fundamentacao,
-        "descricao": this.state.descricao,
-        "armazenamento": this.state.armazenamento,
-        "retencao": this.state.retencao,
-        "estrategiaRemocao": this.state.estrategiaRemocao,
-        "operadores": this.state.operadores,
-        "informacao_sensivel": this.state.informacao_sensivel,
-        "transferencia_int_dados": this.state.transferencia_int_dados,
-        "transferencia_int_dados_pais": this.state.transferencia_int_dados_pais,
-        "consentimento_obtido": this.state.consentimento_obtido,
-        "link_consentimento": this.state.link_consentimento,
-        "observacoes": this.state.observacoes,
-        "data_registro": this.state.data_registro,
-        "idLug": this.state.idLug
-        });
+        var formdata = new FormData();
+        formdata.append("processo", this.state.processo);
+            formdata.append("lugarInventario", this.state.lugarInventario);
+            formdata.append("nomeDado", this.state.nomeDado);
+            formdata.append("nomeSistema", this.state.nomeSistema);
+            formdata.append("chave", this.state.chave);
+            formdata.append("finalidade", this.state.finalidade);
+            formdata.append("escopo", this.state.escopo);
+            formdata.append("baseLegal", this.state.baseLegal);
+            formdata.append("fundamentacao", this.state.fundamentacao);
+            formdata.append("descricao", this.state.descricao);
+            formdata.append("armazenamento", this.state.armazenamento);
+            formdata.append("retencao", this.state.retencao);
+            formdata.append("estrategiaRemocao", this.state.estrategiaRemocao);
+            formdata.append("operadores", this.state.operadores);
+            formdata.append("informacao_sensivel", this.state.informacao_sensivel);
+            formdata.append("transferencia_int_dados", this.state.transferencia_int_dados);
+            formdata.append("transferencia_int_dados_pais", this.state.transferencia_int_dados_pais);
+            formdata.append("consentimento_obtido", this.state.consentimento_obtido);
+            formdata.append("link_consentimento", this.state.link_consentimento);
+            formdata.append("observacoes", this.state.observacoes);
+            formdata.append("data_registro", this.state.data_registro);
+            formdata.append("idLug", this.state.idLug);
 
-        var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-        };
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: formdata,
+                redirect: 'follow'
+            };
 
-        fetch("localhost:8080/criarInventario", requestOptions)
-        .then(response => response.json())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+            fetch("http://localhost:8080/criarInventario", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
     }
 
 
@@ -167,7 +165,7 @@ render(){
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-success">descricao</label>
-                    <input value={this.state.descricao} onChange={(e) => this.setState({chave: e.target.value})}
+                    <input value={this.state.descricao} onChange={(e) => this.setState({descricao: e.target.value})}
                            type="text" class="form-control  p-2" id="descricao" placeholder="Informe um descricao" name="descricao"/>
                 </div>
                 <div class="mb-3">
@@ -227,17 +225,14 @@ render(){
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="exampleInputEmail1" className="form-label text-success">idLug</label>
-                    <select id="idLug" className="custom-select" name="idLug" onChange={(e) => this.setState({idLug: e.target.value})}>
-                        <option selected disabled>Escolhe uma opção </option>
-                        {
-                            this.state.lugar.map(function (item, index) {
-                                return (
-                                    <option value={item.idEmp} name="idLug"
-                                            id="idLug">{item.lugarNome}, {item.idLug} </option>
-                                )
-                            })
-                        }
+                    <label htmlFor="exampleInputEmail1" className="form-label text-success">idEmp</label>
+                    <select id="idLug" className="custom-select" name="idLug"
+                            onChange={(e) => this.setState({idLug: e.target.value})}>
+                        <option selected disabled>Escolhe uma opção</option>
+                        {this.state.lugar.map(function (item, index) {
+                            return (
+                                <option value={item.idLug} name="idLug" id="idLug">{item.lugarNome}, {item.idLug} </option>)
+                        })}
                     </select>
                 </div>
 

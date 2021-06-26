@@ -126,6 +126,57 @@ routes.post('/criarLugar', upload.single('file'), (req, res) => {
     }).then(() =>{return res.json("Sucesso ao gravar lugar")})
 })
 
+routes.post('/criarInventario', upload.single('file'), (req, res) => {
+    const processo = req.body.processo;
+    const lugarInventario = req.body.lugarInventario;
+    const nomeDado = req.body.nomeDado;
+    const nomeSistema = req.body.nomeSistema;
+    const chave = req.body.chave;
+    const finalidade = req.body.finalidade;
+    const escopo = req.body.escopo;
+    const baseLegal = req.body.baseLegal;
+    const fundamentacao = req.body.fundamentacao;
+    const descricao = req.body.descricao;
+    const armazenamento = req.body.armazenamento;
+    const retencao = req.body.retencao;
+    const estrategiaRemocao = req.body.estrategiaRemocao;
+    const operadores = req.body.operadores;
+    const informacao_sensivel = req.body.informacao_sensivel;
+    const transferencia_int_dados = req.body.transferencia_int_dados;
+    const transferencia_int_dados_pais = req.body.transferencia_int_dados_pais;
+    const consentimento_obtido = req.body.consentimento_obtido;
+    const link_consentimento = req.body.link_consentimento;
+    const observacoes = req.body.observacoes;
+    const data_registro = req.body.data_registro;
+    const idLug = req.body.idLug;
+
+    inventario.create({
+        processo:processo,
+        lugarInventario:lugarInventario,
+        nomeDado:nomeDado,
+        nomeSistema:nomeSistema,
+        chave:chave,
+        finalidade:finalidade,
+        escopo:escopo,
+        baseLegal:baseLegal,
+        fundamentacao:fundamentacao,
+        descricao:descricao,
+        armazenamento:armazenamento,
+        retencao:retencao,
+        estrategiaRemocao:estrategiaRemocao,
+        operadores:operadores,
+        informacao_sensivel:informacao_sensivel,
+        transferencia_int_dados:transferencia_int_dados,
+        transferencia_int_dados_pais:transferencia_int_dados_pais,
+        consentimento_obtido:consentimento_obtido,
+        link_consentimento:link_consentimento,
+        observacoes:observacoes,
+        data_registro:data_registro,
+        idLug:idLug
+
+    }).then(() =>{return res.json("Sucesso ao gravar inventario")})
+})
+
 routes.get('/empresas/:idEmp', (req,res)=>{
     const idEmp = req.params.idEmp;
     empresa.findOne({where:{idEmp:idEmp}}).then(result =>{
@@ -133,15 +184,23 @@ routes.get('/empresas/:idEmp', (req,res)=>{
     })
 })
 
-routes.post('/deleteLugar/:idLug', (req,res)=>{
+routes.delete('/deleteLugar/:idLug', (req,res)=>{
     const idLug= req.params.idLug;
+    console.log(idLug)
     lugar.destroy({where: { idLug: idLug}})
         .then(() => {return res.json("Sucesso ao deletar lugar")});
+
 
 })
 
 routes.get('/empresasAll', (req,res)=>{
     empresa.findAll().then(result =>{
+        res.json(result)
+    })
+})
+
+routes.get('/lugaresAll', (req,res)=>{
+    lugar.findAll().then(result =>{
         res.json(result)
     })
 })

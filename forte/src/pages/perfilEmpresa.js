@@ -35,8 +35,8 @@ export default class Empresas extends Component {
     this.carregaEmpresa()
     this.carregaLugares()
 
-    
-}
+
+  }
 
   carregaLugares() {
     var myHeaders = new Headers();
@@ -48,9 +48,9 @@ export default class Empresas extends Component {
       redirect: 'follow'
     };
     fetch("http://localhost:8080/lugares/" + this.state.to, requestOptions)
-      .then(response => response.json())
-      .then(response => { this.setState({ lugar: response || [] }) })
-      .catch(error => console.log('error', error));
+        .then(response => response.json())
+        .then(response => { this.setState({ lugar: response || [] }) })
+        .catch(error => console.log('error', error));
     console.log("meu teste")
     console.log(this.state.result)
   }
@@ -66,9 +66,9 @@ export default class Empresas extends Component {
     };
 
     fetch("http://localhost:8080/empresas/" + this.state.to, requestOptions)
-      .then(response => response.json())
-      .then(response => { this.setState({ empresa: response || [] }) })
-      .catch(error => console.log('error', error));
+        .then(response => response.json())
+        .then(response => { this.setState({ empresa: response || [] }) })
+        .catch(error => console.log('error', error));
   }
 
   deleteLugar(idLug) {
@@ -78,103 +78,101 @@ export default class Empresas extends Component {
     var formdata = new FormData();
 
     var requestOptions = {
-      method: 'POST',
+      method: 'DELETE',
       headers: myHeaders,
       body: formdata,
       redirect: 'follow'
     };
 
     fetch("http://localhost:8080/deleteLugar/" + idLug, requestOptions)
-      .then(response => response.json())
-      .then(response => { this.setState({ lugar: response || [] }) })
         .then(response =>{
-
             this.setState({redirect:true})
             alert('Deletado com sucesso!!!')
-
+            window.location.reload()
        })
-      .then(result => console.log(result))
+
+
 
   }
 
   exibe(v) {
     if (v != undefined) {
       return (
-        <p style={{ fontSize: 12, color: 'green' }}>Perfil: {this.state.empresa.perfil}</p>
+          <p style={{ fontSize: 12, color: 'green' }}>Perfil: {this.state.empresa.perfil}</p>
       )
     }
   }
 
   render() {
     if(this.state.redirect === true){
-      return  <Redirect to={{pathname: "/empresas"}}/>
+      return  <Redirect to={{pathname: "/perfilEmpresa?c="+this.state.to}}/>
     }
     return (
 
-      <React.Fragment>
-        <Head2 />
+        <React.Fragment>
+          <Head2 />
 
-        <div class="container mt-3 bg-light">
-          <div class="row">
-          <p>{this.state.empresa.razaosocial} |</p>
-          <p>{this.state.empresa.cnpj} | </p>
-          <p>{this.state.empresa.email}</p>
-          <p>{this.state.empresa.perfil}</p>{/*esse metodo verifica se o cmapo é nulo, se ele nao ofr vai exibi, caso seja nulo nao vai mostrar nada */}
+          <div class="container mt-3 bg-light">
+            <div class="row">
+              <p>{this.state.empresa.razaosocial} |</p>
+              <p>{this.state.empresa.cnpj} | </p>
+              <p>{this.state.empresa.email}</p>
+              <p>{this.state.empresa.perfil}</p>{/*esse metodo verifica se o cmapo é nulo, se ele nao ofr vai exibi, caso seja nulo nao vai mostrar nada */}
+            </div>
           </div>
-        </div>
-        <br /><br />
+          <br /><br />
 
-        <div class="container">
-          <div class="row">
-            <h3>Lugares da empresa: {this.state.empresa.razaosocial}</h3>
-          </div>
-          <div class="row">
-          <table class="table table-responsive ">
-            <thead>
-              <tr>
-                <th scope="col">Delete</th>
-                <th scope="col">Update</th>
-                {/*<th scope="col">idEmp</th>
-                <th scope="col">idLug</th> */}
-                <th scope="col">LugarNome</th>
-                <th scope="col">Equipe</th>
-                <th scope="col">responsavel</th>
-                <th scope="col">email</th>
-                <th scope="col">perfis</th>
-                <th scope="col">fonte_acesso</th>
-              </tr>
-
-            </thead>
-
-            {this.state.lugar.map((result,a) =>
-                <tbody style={{ fontSize: 18, fontWeight: 1000, color: 'black' }}>
+          <div class="container">
+            <div class="row">
+              <h3>Lugares da empresa: {this.state.empresa.razaosocial}</h3>
+            </div>
+            <div class="row">
+              <table class="table table-responsive ">
+                <thead>
                 <tr>
-                  <td>
-                    <button type="submit" onClick={() => this.deleteLugar(result.idLug)}>delete</button>
-                  </td>
-                  <td>
-                    <a class="ml-2" href="#" style={{ color: 'black' }} >Alterar</a>
-                  </td>
-                  {/*<td>{result.idEmp}</td>
-              <td>{result.idLug}</td>*/}
-                  <td><a class="ml-2" href={"http://localhost:3000/InventarioLug?c="+result.idLug} style={{ color: 'black' }} >{result.lugarNome}</a></td>
-                  <td>{result.equipe}</td>
-                  <td>{result.responsavel}</td>
-                  <td>{result.email}</td>
-                  <td>{result.perfis}</td>
-                  <td>{result.fonte_acesso}</td>
-                  <i class="fas fa-trash-alt"></i>
-
+                  <th scope="col">Delete</th>
+                  <th scope="col">Update</th>
+                  {/*<th scope="col">idEmp</th>
+                <th scope="col">idLug</th> */}
+                  <th scope="col">LugarNome</th>
+                  <th scope="col">Equipe</th>
+                  <th scope="col">responsavel</th>
+                  <th scope="col">email</th>
+                  <th scope="col">perfis</th>
+                  <th scope="col">fonte_acesso</th>
                 </tr>
 
-              </tbody>
-            )}
-          </table>
-          </div>
-        </div>
+                </thead>
 
-        <Footer />
-      </React.Fragment>
+                {this.state.lugar.map((result,a) =>
+                    <tbody style={{ fontSize: 18, fontWeight: 1000, color: 'black' }}>
+                    <tr>
+                      <td>
+                        <button type="submit" onClick={() => this.deleteLugar(result.idLug)}>delete</button>
+                      </td>
+                      <td>
+                        <a class="ml-2" href="#" style={{ color: 'black' }} >Alterar</a>
+                      </td>
+                      {/*<td>{result.idEmp}</td>
+              <td>{result.idLug}</td>*/}
+                      <td><a class="ml-2" href={"http://localhost:3000/InventarioLug?c="+result.idLug} style={{ color: 'black' }} >{result.lugarNome}</a></td>
+                      <td>{result.equipe}</td>
+                      <td>{result.responsavel}</td>
+                      <td>{result.email}</td>
+                      <td>{result.perfis}</td>
+                      <td>{result.fonte_acesso}</td>
+                      <i class="fas fa-trash-alt"></i>
+
+                    </tr>
+
+                    </tbody>
+                )}
+              </table>
+            </div>
+          </div>
+
+          <Footer />
+        </React.Fragment>
     );
   }
 
