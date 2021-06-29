@@ -189,8 +189,13 @@ routes.delete('/deleteLugar/:idLug', (req,res)=>{
     console.log(idLug)
     lugar.destroy({where: { idLug: idLug}})
         .then(() => {return res.json("Sucesso ao deletar lugar")});
+})
 
-
+routes.delete('/deleteInventario/:idInv', (req,res)=>{
+    const idInv= req.params.idInv;
+    console.log(idInv)
+    inventario.destroy({where: { idInv: idInv}})
+        .then(() => {return res.json("Sucesso ao deletar inventario")});
 })
 
 routes.get('/empresasAll', (req,res)=>{

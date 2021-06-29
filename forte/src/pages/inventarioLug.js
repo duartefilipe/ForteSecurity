@@ -19,12 +19,13 @@ export default class InventarioLug extends Component {
       to: '',
       empresa: [],
       lugar: [],
+      inventario: [],
       redirect:false
     }
     this.carregaEmpresa = this.carregaEmpresa.bind(this);
     this.carregaLugares = this.carregaLugares.bind(this);
     this.carregaInventario = this.carregaInventario.bind(this);
-    this.deleteLugar = this.deleteLugar.bind(this);
+    this.deleteInventario = this.deleteInventario.bind(this);
     this.exibe = this.exibe.bind(this);
   }
 
@@ -85,11 +86,11 @@ export default class InventarioLug extends Component {
 
     fetch("http://localhost:8080/inventario/"+this.state.to, requestOptions)
         .then(response => response.json())
-        .then(result => console.log(result))
+        .then(response => { this.setState({ inventario: response || [] }) })
         .catch(error => console.log('error', error));
   }
 
-  deleteLugar(idLug) {
+  deleteInventario(idInv) {
     var myHeaders = new Headers();
     myHeaders.append("Cookie", "essecookie=s%3AeOpl5luE9enimBHkvpkw6HS-sWobT191.jz5O7Hu5bKFVxSbkZu6bo8DU5QuSbZ4rFqOuHxBmEUA");
 
@@ -102,15 +103,12 @@ export default class InventarioLug extends Component {
       redirect: 'follow'
     };
 
-    fetch("http://localhost:8080/deleteLugar/" + idLug, requestOptions)
+    fetch("http://localhost:8080/deleteInventario/"+idInv, requestOptions)
         .then(response =>{
             this.setState({redirect:true})
             alert('Deletado com sucesso!!!')
             window.location.reload()
        })
-
-
-
   }
 
   exibe(v) {
@@ -150,9 +148,8 @@ export default class InventarioLug extends Component {
                 <tr>
                   <th scope="col">Delete</th>
                   <th scope="col">Update</th>
-                  {/*<th scope="col">idEmp</th>
-                <th scope="col">idLug</th> */}
-                  <th scope="col">LugarNome</th>
+
+                  <th scope="col">processo</th>
                   <th scope="col">Equipe</th>
                   <th scope="col">responsavel</th>
                   <th scope="col">email</th>
@@ -162,19 +159,19 @@ export default class InventarioLug extends Component {
 
                 </thead>
 
-                {this.state.lugar.map((result,a) =>
+                {this.state.inventario.map((result,a) =>
                     <tbody style={{ fontSize: 18, fontWeight: 1000, color: 'black' }}>
                     <tr>
                       <td>
-                        {/*<button type="submit" onClick={() => this.deleteLugar(result.idLug)}>delete</button>*/}
-                        <button type="submit">delete</button>
+                        <button type="submit" onClick={() => this.deleteInventario(result.idInv)}>delete</button>
+
                       </td>
                       <td>
                         <a class="ml-2" href="#" style={{ color: 'black' }} >Alterar</a>
                       </td>
                       {/*<td>{result.idEmp}</td>
               <td>{result.idLug}</td>*/}
-                      <td><a class="ml-2" href="#" style={{ color: 'black' }} >{result.processo}</a></td>
+                      <td>{result.processo}</td>
                       <td>{result.lugarInventario}</td>
                       <td>{result.nomeDado}</td>
                       <td>{result.nomeSistema}</td>
