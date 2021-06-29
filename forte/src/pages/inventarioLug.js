@@ -6,7 +6,7 @@ import Head2 from '../components/head2';
 import Footer from '../components/footer';
 import {Redirect} from "react-router";
 
-export default class Empresas extends Component {
+export default class InventarioLug extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +23,7 @@ export default class Empresas extends Component {
     }
     this.carregaEmpresa = this.carregaEmpresa.bind(this);
     this.carregaLugares = this.carregaLugares.bind(this);
+    this.carregaInventario = this.carregaInventario.bind(this);
     this.deleteLugar = this.deleteLugar.bind(this);
     this.exibe = this.exibe.bind(this);
   }
@@ -34,6 +35,7 @@ export default class Empresas extends Component {
 
     this.carregaEmpresa()
     this.carregaLugares()
+    this.carregaInventario()
 
 
   }
@@ -68,6 +70,22 @@ export default class Empresas extends Component {
     fetch("http://localhost:8080/empresas/" + this.state.to, requestOptions)
         .then(response => response.json())
         .then(response => { this.setState({ empresa: response || [] }) })
+        .catch(error => console.log('error', error));
+  }
+
+  carregaInventario() {
+    var myHeaders = new Headers();
+    myHeaders.append("Cookie", "essecookie=s%3AOzBwaF-fxcMFqoKNpKy8WhBjuyTHbc6t.irLLwrWoNHTWQJfcwbKvt1dHIuicGMHHzlEmNw452WE");
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    fetch("http://localhost:8080/inventario/"+this.state.to, requestOptions)
+        .then(response => response.json())
+        .then(result => console.log(result))
         .catch(error => console.log('error', error));
   }
 
@@ -124,7 +142,7 @@ export default class Empresas extends Component {
 
           <div class="container">
             <div class="row">
-              <h3>Lugares da empresa: {this.state.empresa.razaosocial}</h3>
+              <h3>Inventarios Lugar: {this.state.lugar.lugarNome}</h3>
             </div>
             <div class="row">
               <table class="table table-responsive ">
@@ -148,19 +166,20 @@ export default class Empresas extends Component {
                     <tbody style={{ fontSize: 18, fontWeight: 1000, color: 'black' }}>
                     <tr>
                       <td>
-                        <button type="submit" onClick={() => this.deleteLugar(result.idLug)}>delete</button>
+                        {/*<button type="submit" onClick={() => this.deleteLugar(result.idLug)}>delete</button>*/}
+                        <button type="submit">delete</button>
                       </td>
                       <td>
                         <a class="ml-2" href="#" style={{ color: 'black' }} >Alterar</a>
                       </td>
                       {/*<td>{result.idEmp}</td>
               <td>{result.idLug}</td>*/}
-                      <td><a class="ml-2" href={"http://localhost:3000/inventarioLug?c="+result.idLug} style={{ color: 'black' }} >{result.lugarNome}</a></td>
-                      <td>{result.equipe}</td>
-                      <td>{result.responsavel}</td>
-                      <td>{result.email}</td>
-                      <td>{result.perfis}</td>
-                      <td>{result.fonte_acesso}</td>
+                      <td><a class="ml-2" href="#" style={{ color: 'black' }} >{result.processo}</a></td>
+                      <td>{result.lugarInventario}</td>
+                      <td>{result.nomeDado}</td>
+                      <td>{result.nomeSistema}</td>
+                      <td>{result.chave}</td>
+                      <td>{result.finalidade}</td>
                       <i class="fas fa-trash-alt"></i>
 
                     </tr>

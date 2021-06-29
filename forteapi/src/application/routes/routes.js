@@ -150,7 +150,7 @@ routes.post('/criarInventario', upload.single('file'), (req, res) => {
     const data_registro = req.body.data_registro;
     const idLug = req.body.idLug;
 
-    inventario.create({
+inventario.create({
         processo:processo,
         lugarInventario:lugarInventario,
         nomeDado:nomeDado,

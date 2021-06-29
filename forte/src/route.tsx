@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import inventario from './pages/inventario';
+import inventarioLug from './pages/inventarioLug';
 import home from './pages/home';
 import login from './pages/login';
 import registrar from './pages/registrar';
@@ -17,7 +17,7 @@ function route(){
         <BrowserRouter>
             {/* COMENTÁRIO JSX <Route path="/" exact component ={home}/>*/}
             <Route path="/" exact component ={login}/>
-            <Route path="/inventario" component ={inventario}/>
+            <Route path="/inventarioLug" component ={inventarioLug}/>
             <Route path="/criarInventario" component ={criarInventario}/>
             <Route path="/login" component ={login}/>
             <Route path="/registrar" component ={registrar}/>
