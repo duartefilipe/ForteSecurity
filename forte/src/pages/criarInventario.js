@@ -225,7 +225,7 @@ render(){
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="exampleInputEmail1" className="form-label text-success">idEmp</label>
+                    <label htmlFor="exampleInputEmail1" className="form-label text-success">lugar</label>
                     <select id="idLug" className="custom-select" name="idLug"
                             onChange={(e) => this.setState({idLug: e.target.value})}>
                         <option selected disabled>Escolhe uma opção</option>

@@ -27,6 +27,7 @@ const empresa = connect.define('empresa',{
           type: sequelize.STRING,
           allowNull:false,
       }
+
 })
 
 empresa.sync({force:false}).then(() =>{console.log('Tabela empresa Criada')}).catch(() => {console.log('Erro ao criar tabela')})

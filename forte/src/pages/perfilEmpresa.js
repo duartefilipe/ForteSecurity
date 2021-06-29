@@ -31,11 +31,8 @@ export default class Empresas extends Component {
     var url_string = window.location.href;
     var url = new URL(url_string);
     this.state.to = url.searchParams.get("c");
-
     this.carregaEmpresa()
     this.carregaLugares()
-
-
   }
 
   carregaLugares() {
@@ -73,26 +70,23 @@ export default class Empresas extends Component {
 
   deleteLugar(idLug) {
     var myHeaders = new Headers();
-    myHeaders.append("Cookie", "essecookie=s%3AeOpl5luE9enimBHkvpkw6HS-sWobT191.jz5O7Hu5bKFVxSbkZu6bo8DU5QuSbZ4rFqOuHxBmEUA");
+    myHeaders.append("Cookie", "essecookie=s%3AMAWCoLATixdDdNqaYf9OEvphTG1jxf3j.x4m2QPja7wjL8ujYYRO3ShQDT3gZEmAAizkJCZGAjFY");
 
     var formdata = new FormData();
 
     var requestOptions = {
-      method: 'DELETE',
+      method: 'POST',
       headers: myHeaders,
       body: formdata,
       redirect: 'follow'
     };
 
-    fetch("http://localhost:8080/deleteLugar/" + idLug, requestOptions)
+    fetch("http://localhost:8080/deleteLugar/"+idLug, requestOptions)
         .then(response =>{
-            this.setState({redirect:true})
-            alert('Deletado com sucesso!!!')
-            window.location.reload()
-       })
-
-
-
+          this.setState({redirect:true})
+          alert('Deletado com sucesso!!!')
+          window.location.replace('/empresas');
+        })
   }
 
   exibe(v) {
@@ -117,7 +111,7 @@ export default class Empresas extends Component {
               <p>{this.state.empresa.razaosocial} |</p>
               <p>{this.state.empresa.cnpj} | </p>
               <p>{this.state.empresa.email}</p>
-              <p>{this.state.empresa.perfil}</p>{/*esse metodo verifica se o cmapo é nulo, se ele nao ofr vai exibi, caso seja nulo nao vai mostrar nada */}
+              <p>{this.state.empresa.perfil}</p>
             </div>
           </div>
           <br /><br />

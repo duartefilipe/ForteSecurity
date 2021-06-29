@@ -6,7 +6,7 @@ import Head2 from '../components/head2';
 import Footer from '../components/footer';
 import {Redirect} from "react-router";
 
-export default class InventarioLug extends Component {
+export default class inventarioLug extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,6 @@ export default class InventarioLug extends Component {
     this.carregaEmpresa = this.carregaEmpresa.bind(this);
     this.carregaLugares = this.carregaLugares.bind(this);
     this.carregaInventario = this.carregaInventario.bind(this);
-    this.deleteInventario = this.deleteInventario.bind(this);
     this.exibe = this.exibe.bind(this);
   }
 
@@ -33,12 +32,9 @@ export default class InventarioLug extends Component {
     var url_string = window.location.href;
     var url = new URL(url_string);
     this.state.to = url.searchParams.get("c");
-
     this.carregaEmpresa()
     this.carregaLugares()
     this.carregaInventario()
-
-
   }
 
   carregaLugares() {
@@ -54,9 +50,7 @@ export default class InventarioLug extends Component {
         .then(response => response.json())
         .then(response => { this.setState({ lugar: response || [] }) })
         .catch(error => console.log('error', error));
-    console.log("meu teste")
-    console.log(this.state.result)
-  }
+}
 
   carregaEmpresa() {
     var myHeaders = new Headers();
@@ -92,12 +86,10 @@ export default class InventarioLug extends Component {
 
   deleteInventario(idInv) {
     var myHeaders = new Headers();
-    myHeaders.append("Cookie", "essecookie=s%3AeOpl5luE9enimBHkvpkw6HS-sWobT191.jz5O7Hu5bKFVxSbkZu6bo8DU5QuSbZ4rFqOuHxBmEUA");
-
+    myHeaders.append("Cookie", "essecookie=s%3AMAWCoLATixdDdNqaYf9OEvphTG1jxf3j.x4m2QPja7wjL8ujYYRO3ShQDT3gZEmAAizkJCZGAjFY");
     var formdata = new FormData();
-
     var requestOptions = {
-      method: 'DELETE',
+      method: 'POST',
       headers: myHeaders,
       body: formdata,
       redirect: 'follow'
@@ -105,16 +97,16 @@ export default class InventarioLug extends Component {
 
     fetch("http://localhost:8080/deleteInventario/"+idInv, requestOptions)
         .then(response =>{
-            this.setState({redirect:true})
-            alert('Deletado com sucesso!!!')
-            window.location.reload()
-       })
+          this.setState({redirect:true})
+          alert('Deletado com sucesso!!!')
+          window.location.replace('/empresas');
+        })
   }
 
   exibe(v) {
     if (v != undefined) {
       return (
-          <p style={{ fontSize: 12, color: 'green' }}>Perfil: {this.state.empresa.perfil}</p>
+          <p style={{ fontSize: 12, color: 'green' }}>lugarNome: {this.state.lugar.lugarNome}</p>
       )
     }
   }
@@ -130,10 +122,7 @@ export default class InventarioLug extends Component {
 
           <div class="container mt-3 bg-light">
             <div class="row">
-              <p>{this.state.empresa.razaosocial} |</p>
-              <p>{this.state.empresa.cnpj} | </p>
-              <p>{this.state.empresa.email}</p>
-              <p>{this.state.empresa.perfil}</p>{/*esse metodo verifica se o cmapo é nulo, se ele nao ofr vai exibi, caso seja nulo nao vai mostrar nada */}
+              <p>{this.state.email} |</p>
             </div>
           </div>
           <br /><br />

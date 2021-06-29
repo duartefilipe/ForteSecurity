@@ -184,18 +184,25 @@ routes.get('/empresas/:idEmp', (req,res)=>{
     })
 })
 
-routes.delete('/deleteLugar/:idLug', (req,res)=>{
+routes.post('/deleteLugar/:idLug', (req,res)=>{
     const idLug= req.params.idLug;
     console.log(idLug)
     lugar.destroy({where: { idLug: idLug}})
         .then(() => {return res.json("Sucesso ao deletar lugar")});
 })
 
-routes.delete('/deleteInventario/:idInv', (req,res)=>{
+routes.post('/deleteInventario/:idInv', (req,res)=>{
     const idInv= req.params.idInv;
     console.log(idInv)
     inventario.destroy({where: { idInv: idInv}})
         .then(() => {return res.json("Sucesso ao deletar inventario")});
+})
+
+routes.post('/deleteEmpresa/:idEmp', (req,res)=>{
+    const idEmp= req.params.idEmp;
+    console.log(idEmp)
+    empresa.destroy({where: { idEmp: idEmp}})
+        .then(() => {return res.json("Sucesso ao deletar empresa")});
 })
 
 routes.get('/empresasAll', (req,res)=>{

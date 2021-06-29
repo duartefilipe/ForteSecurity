@@ -40,6 +40,25 @@ export default class Forum extends Component{
           .then(response => {this.setState({empresa: response || []})})
           .catch(error => console.log('error', error));
       }
+
+    deleteEmpresa(idEmp) {
+        var myHeaders = new Headers();
+        myHeaders.append("Cookie", "essecookie=s%3AMAWCoLATixdDdNqaYf9OEvphTG1jxf3j.x4m2QPja7wjL8ujYYRO3ShQDT3gZEmAAizkJCZGAjFY");
+        var formdata = new FormData();
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:8080/deleteEmpresa/"+idEmp, requestOptions)
+            .then(response =>{
+                this.setState({redirect:true})
+                alert('Deletado com sucesso!!!')
+                window.location.replace('/empresas');
+            })
+    }
   
   render(){
     return (
@@ -64,7 +83,7 @@ export default class Forum extends Component{
             <tbody style={{fontSize:18, fontWeight:1000, color:'black'}}>
               <tr>
                 <td><a href="#" style={{color:'black'}}>Editar</a></td>
-                <td><a href="#" style={{color:'black'}}>Deletar</a></td>
+                <td><button type="submit" onClick={() => this.deleteEmpresa(result.idEmp)}>delete</button></td>
                   {/*<td><a href="#" style={{color:'black'}} href={"http://localhost:3000/InventarioEmp?c="+result.idEmp}>Inventario</a></td>*/}
                 <td><a class="ml-2" href={"http://localhost:3000/perfilEmpresa?c="+result.idEmp} style={{color:'black'}} >{result.idEmp}{result.razaosocial}</a></td>
                 <td>{result.cnpj}</td>

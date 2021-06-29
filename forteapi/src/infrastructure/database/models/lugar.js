@@ -36,6 +36,7 @@ const lugar = connect.define('lugar',{
       idEmp: {
         type: sequelize.INTEGER,
         allowNull:false,
+
       }
     
 })

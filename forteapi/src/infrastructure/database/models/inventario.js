@@ -90,6 +90,7 @@ const inventario = connect.define('inventario',{
     idLug:{
         type: sequelize.INTEGER,
         allowNull: false,
+
     },
     idInv: {
         allowNull: false,
